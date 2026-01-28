@@ -23,8 +23,7 @@ const app = express();  //Creates an Express application instance.
 //res → response object (what you send back)
 app.get("/", (req, res) => {
   res.json({
-    message: "Server is successfully understand and Server running 🚀",
-    message: "Auto deploy working 🚀",
+    message: "Server is successfully running 🚀",
     app: process.env.APP_NAME, //Reads APP_NAME from .env file.
     env: process.env.NODE_ENV
   });
