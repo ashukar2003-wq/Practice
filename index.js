@@ -1,38 +1,31 @@
-// import express from "express";
-
-// const app = express();
-
-// app.get("/", (req, res) => {
-//   res.send("Server is running 🚀");
-// });
-
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
-dotenv.config(); //Reads the .env file and loads its values into process.env.
+dotenv.config();
 
-const app = express();  //Creates an Express application instance.
+const app = express();
 
+// allow requests from React
+app.use(cors());
+app.use(express.json());
 
-//req → request object (data coming from client)
-//res → response object (what you send back)
+// root route (optional, human-friendly)
 app.get("/", (req, res) => {
+  res.send("Practice Backend is running 🚀");
+});
+
+// API route (machines / React)
+app.get("/api/health", (req, res) => {
   res.json({
     message: "Server is successfully running on Render 🚀",
-    app: process.env.APP_NAME, //Reads APP_NAME from .env file.
+    app: process.env.APP_NAME,
     env: process.env.NODE_ENV
   });
-  //Sends a JSON response to the client.
 });
 
 const PORT = process.env.PORT || 3000;
 
-// Starts the server and listens on the selected port.
 app.listen(PORT, () => {
-  console.log (`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
